@@ -29,6 +29,50 @@ const SearchForm = () => {
                     </button>
                 </div>
             </div>
+            <div className="result">
+                <ul className="result__list">
+                    <li className="list__item">
+                        <i class="fas fa-map-marker-alt"></i> Helsinki, Finland
+                    </li>
+                    <li className="list__item">
+                        <i class="fas fa-map-marker-alt"></i> Turku, Finland
+                    </li>
+                    <li className="list__item">
+                        <i class="fas fa-map-marker-alt"></i> Oluo, Finland
+                    </li>
+                    <li className="list__item">
+                        <i class="fas fa-map-marker-alt"></i> Vassa, Finland
+                    </li>
+                </ul>
+            </div>
+            <div className="guests">
+                <div className="guests__filter">
+                    <div className="filter__text">adult</div>
+                    <div className="filter__subtext">ages 13 and above</div>
+                    <div className="filter__btns">
+                        <button className="filter__btn">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span>0</span>
+                        <button className="filter__btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div className="guests__filter">
+                    <div className="filter__text">kids</div>
+                    <div className="filter__subtext">ages 2-12</div>
+                    <div className="filter__btns">
+                        <button className="filter__btn">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span>0</span>
+                        <button className="filter__btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

@@ -156,7 +156,7 @@ input[type='number']::-webkit-outer-spin-button {
     position: fixed;
     z-index: 2;
     width: 100vw;
-    height: 50vh;
+    height: 55vh;
     background-color: #f9fafb;
 }
 
@@ -164,14 +164,22 @@ input[type='number']::-webkit-outer-spin-button {
     display: flex;
     margin-left: 32px;
     margin-right: 32px;
+    margin-top: 32px;
 }
 
 .form__group {
+    display: flex;
+    width: 100%;
+}
+
+.form__group:nth-child(3) {
+    justify-content: center;
 }
 
 .form__group:nth-child(1) input {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
+    position: relative;
 }
 
 .form__group:nth-child(2) input {
@@ -189,6 +197,7 @@ input[type='number']::-webkit-outer-spin-button {
     font-weight: 300;
     text-transform: capitalize;
     outline: none;
+    width: 100%;
 }
 
 .form__input:focus {
@@ -202,6 +211,8 @@ input[type='number']::-webkit-outer-spin-button {
     border-radius: 16px;
     border: none;
     box-shadow: 4px 14px 11px -2px #e5e7eb;
+    width: 40%;
+    justify-self: flex-end;
 }
 
 label[for='location'] {
@@ -212,14 +223,78 @@ label[for='location'] {
     text-transform: uppercase;
     font-weight: 700;
     opacity: 50%;
+    z-index: 1;
 }
 
 label[for='guests'] {
     position: absolute;
-    right: 696px;
+    right: 784px;
     top: 48px;
     font-size: 0.64rem;
     text-transform: uppercase;
     font-weight: 700;
     opacity: 50%;
+}
+
+.result {
+    position: absolute;
+    top: 80px;
+    left: 0px;
+    margin: 32px;
+    width: 30%;
+}
+
+.result__list {
+    list-style: none;
+}
+
+.list__item {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    font-weight: 100;
+}
+
+.list__item i {
+    margin-right: 8px;
+}
+
+.guests {
+    position: absolute;
+    top: 112px;
+    left: 448px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.guests > div:nth-child(2) {
+    margin-top: 32px;
+}
+
+.guests__filter {
+    margin-top: 8px;
+}
+
+.filter__text {
+    font-weight: 400;
+    text-transform: capitalize;
+    font-size: 1rem;
+}
+
+.filter__subtext {
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+.filter__btns {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    margin-top: 16px;
+}
+
+.filter__btn {
+    background-color: transparent;
+    border-radius: 8px;
+    border: #9ca3af solid 1px;
 }
