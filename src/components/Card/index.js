@@ -8,7 +8,7 @@ const Card = ({ host, ...props }) => {
                 {host && <p className="info__host">super host</p>}
                 <p className="info__description">entire apartment 2 beds</p>
                 <div className="info__rating">
-                    <i class="fas fa-star rating">
+                    <i className="fas fa-star rating">
                         <span className="rating__amount">4.96</span>
                     </i>
                 </div>
