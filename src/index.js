@@ -7,10 +7,11 @@ import SearchForm from './components/Search';
 import SearchContext from './searchContext';
 import 'style.css';
 import '@fortawesome/fontawesome-free/css/all.css';
-import data from 'stays.json';
+import stays from './stays.json';
 
 const App = () => {
     const [toggle, setToggle] = useState(true);
+    useEffect(() => {});
     return (
         <>
             <SearchContext.Provider value={{ toggle, setToggle }}>
@@ -19,12 +20,33 @@ const App = () => {
             </SearchContext.Provider>
             <Banner />
             <div className="card__container">
-                <Card host={true} />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {stays.map(
+                    ({
+                        city,
+                        country,
+                        superHost,
+                        title,
+                        rating,
+                        maxGuests,
+                        beds,
+                        photo,
+                        type,
+                    }) => {
+                        return (
+                            <Card
+                                city={city}
+                                country={country}
+                                host={superHost}
+                                title={title}
+                                rating={rating}
+                                maxGuests={maxGuests}
+                                beds={beds}
+                                photo={photo}
+                                type={type}
+                            />
+                        );
+                    }
+                )}
             </div>
         </>
     );
