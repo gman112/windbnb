@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
@@ -11,12 +11,11 @@ import stays from './stays.json';
 
 const App = () => {
     const [toggle, setToggle] = useState(true);
-    useEffect(() => {});
     return (
         <>
             <SearchContext.Provider value={{ toggle, setToggle }}>
                 {toggle && <Navbar />}
-                {!toggle && <SearchForm />}
+                {!toggle && <SearchForm cities={stays} />}
             </SearchContext.Provider>
             <Banner />
             <div className="card__container">

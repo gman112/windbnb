@@ -87,6 +87,7 @@ input[type='number']::-webkit-outer-spin-button {
 .banner__title {
     font-size: 1.953rem;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .banner__subtitle {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchForm = () => {
+const SearchForm = ({ cities, ...props }) => {
     return (
         <div className="form__container">
             <div className="form">
@@ -30,20 +30,20 @@ const SearchForm = () => {
                 </div>
             </div>
             <div className="result">
-                {/* <ul className="result__list">
-                    <li className="list__item">
-                        <i class="fas fa-map-marker-alt"></i> Helsinki, Finland
-                    </li>
-                    <li className="list__item">
-                        <i class="fas fa-map-marker-alt"></i> Turku, Finland
-                    </li>
-                    <li className="list__item">
-                        <i class="fas fa-map-marker-alt"></i> Oluo, Finland
-                    </li>
-                    <li className="list__item">
-                        <i class="fas fa-map-marker-alt"></i> Vassa, Finland
-                    </li>
-                </ul> */}
+                <ul className="result__list">
+                    {cities
+                        .filter(({ city }) => {
+                            return [...new Set(cities.city)];
+                        })
+                        .map((city) => {
+                            return (
+                                <li className="list__item">
+                                    <i className="fas fa-map-marker-alt"></i>{' '}
+                                    {`${city}, Britain`}
+                                </li>
+                            );
+                        })}
+                </ul>
             </div>
             <div className="guests">
                 {/*  <div className="guests__filter">
