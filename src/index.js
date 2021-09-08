@@ -21,6 +21,7 @@ const App = () => {
             <div className="card__container">
                 {stays.map(
                     ({
+                        id,
                         city,
                         country,
                         superHost,
@@ -33,6 +34,7 @@ const App = () => {
                     }) => {
                         return (
                             <Card
+                                key={id}
                                 city={city}
                                 country={country}
                                 host={superHost}

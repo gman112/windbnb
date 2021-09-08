@@ -313,3 +313,7 @@ label[for='guests'] {
     border-radius: 8px;
     border: #9ca3af solid 1px;
 }
+.item__link {
+    text-decoration: none;
+    color: black;
+}

@@ -1,16 +1,24 @@
-import React from 'react';
-
+import React, { useState, useRef } from 'react';
+import _ from 'lodash';
 const SearchForm = ({ cities, ...props }) => {
+    const [locationInput, setLocationInput] = useState('');
+    const [locations, setLocations] = useState([
+        ...new Set(cities.map(({ city }) => city)),
+    ]);
     return (
         <div className="form__container">
             <div className="form">
                 <div className="form__group">
                     <label htmlFor="location">location</label>
                     <input
+                        value={locationInput}
                         type="text"
                         className="form__input"
                         name="location"
                         placeholder="Add location"
+                        onChange={({ target }) => {
+                            setLocationInput(target.value);
+                        }}
                     />
                 </div>
                 <div className="form__group">
@@ -31,18 +39,31 @@ const SearchForm = ({ cities, ...props }) => {
             </div>
             <div className="result">
                 <ul className="result__list">
-                    {cities
-                        .filter(({ city }) => {
-                            return [...new Set(cities.city)];
-                        })
-                        .map((city) => {
-                            return (
-                                <li className="list__item">
-                                    <i className="fas fa-map-marker-alt"></i>{' '}
-                                    {`${city}, Britain`}
-                                </li>
-                            );
-                        })}
+                    {locationInput &&
+                        locations
+                            .filter(
+                                (location) =>
+                                    location ===
+                                    locationInput[0].toUpperCase() +
+                                        locationInput.slice(1).toLowerCase()
+                            )
+                            .map((location) => {
+                                return (
+                                    <li
+                                        className="list__item"
+                                        onClick={({ target }) =>
+                                            console.log(target.innerText)
+                                        }
+                                    >
+                                        <i className="fas fa-map-marker-alt"></i>{' '}
+                                        <a
+                                            href="#"
+                                            className="item__link"
+                                        >{`${location}`}</a>
+                                        <span>, Britain</span>
+                                    </li>
+                                );
+                            })}
                 </ul>
             </div>
             <div className="guests">

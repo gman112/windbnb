@@ -13,7 +13,6 @@ const Card = ({ host, photo, title, type, rating, beds, ...props }) => {
                 ) : (
                     <p className="info__description">{type}</p>
                 )}
-
                 <div className="info__rating">
                     <i className="fas fa-star rating">
                         <span className="rating__amount">
