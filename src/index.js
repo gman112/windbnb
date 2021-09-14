@@ -18,7 +18,12 @@ const App = () => {
                 {!toggle && <SearchForm cities={stays} />}
             </SearchContext.Provider>
             <Banner />
-            <div className="card__container">
+            <div
+                className={`card__container ${
+                    toggle ? '' : 'card__container--blur'
+                }`}
+                onClick={() => setToggle(!toggle)}
+            >
                 {stays.map(
                     ({
                         id,
