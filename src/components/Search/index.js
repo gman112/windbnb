@@ -1,12 +1,17 @@
-import React, { useState, useRef } from 'react';
-import _ from 'lodash';
+import { set } from 'lodash';
+import React, { useState } from 'react';
+import v from 'voca';
 const SearchForm = ({ cities, ...props }) => {
-    const [locationInput, setLocationInput] = useState('');
     const [locations, setLocations] = useState([
         ...new Set(cities.map(({ city }) => city)),
     ]);
     const [showLocations, setShowLocations] = useState(false);
     const [showGuestFilter, setShowGuestFilter] = useState(false);
+    const [adultCounter, setAdultCounter] = useState(0);
+    const [kidCounter, setKidCounter] = useState(0);
+    const [locationInput, setLocationInput] = useState('');
+    const [totalGuests, setTotalGuests] = useState(0);
+
     return (
         <div className="form__container">
             <div className="form">
@@ -20,9 +25,21 @@ const SearchForm = ({ cities, ...props }) => {
                         placeholder="Add location"
                         onFocus={() => {
                             setShowLocations(true);
+                            setShowGuestFilter(false);
                         }}
                         onChange={({ target }) => {
-                            setLocationInput(target.value);
+                            setLocationInput(v.capitalize(target.value));
+                            if (target.value === '')
+                                setLocations([
+                                    ...new Set(cities.map(({ city }) => city)),
+                                ]);
+
+                            const filteredSearch = locations.filter(
+                                (location) =>
+                                    location === v.capitalize(target.value)
+                            );
+                            if (filteredSearch.length > 0)
+                                setLocations(filteredSearch);
                         }}
                     />
                 </div>
@@ -35,12 +52,19 @@ const SearchForm = ({ cities, ...props }) => {
                         placeholder="Add guests"
                         onFocus={() => {
                             setShowGuestFilter(true);
+                            setShowLocations(false);
                         }}
                     />
                     <div className="form__result"></div>
                 </div>
                 <div className="form__group">
-                    <button className="form__btn">
+                    <button
+                        className="form__btn"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setTotalGuests(kidCounter + adultCounter);
+                        }}
+                    >
                         <i className="fas fa-search btn__icon"></i> search
                     </button>
                 </div>
@@ -54,16 +78,17 @@ const SearchForm = ({ cities, ...props }) => {
                                     <li
                                         key={location}
                                         className="list__item"
-                                        onClick={({ target }) =>
-                                            console.log(target.innerText)
-                                        }
+                                        onClick={({ target }) => {
+                                            setLocationInput(
+                                                v.capitalize(target.innerText)
+                                            );
+                                        }}
                                     >
                                         <i className="fas fa-map-marker-alt"></i>{' '}
                                         <a
                                             href="#"
                                             className="item__link"
                                         >{`${location}`}</a>
-                                        <span>, Britain</span>
                                     </li>
                                 );
                             })}
@@ -77,11 +102,23 @@ const SearchForm = ({ cities, ...props }) => {
                                 ages 13 and above
                             </div>
                             <div className="filter__btns">
-                                <button className="filter__btn">
+                                <button
+                                    className="filter__btn"
+                                    onClick={() =>
+                                        setAdultCounter((prev) =>
+                                            prev <= 0 ? 0 : prev - 1
+                                        )
+                                    }
+                                >
                                     <i className="fas fa-minus"></i>
                                 </button>
-                                <span>0</span>
-                                <button className="filter__btn">
+                                <span>{adultCounter}</span>
+                                <button
+                                    className="filter__btn"
+                                    onClick={() =>
+                                        setAdultCounter((prev) => prev + 1)
+                                    }
+                                >
                                     <i className="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -92,11 +129,23 @@ const SearchForm = ({ cities, ...props }) => {
                             <div className="filter__text">kids</div>
                             <div className="filter__subtext">ages 2-12</div>
                             <div className="filter__btns">
-                                <button className="filter__btn">
+                                <button
+                                    className="filter__btn"
+                                    onClick={() =>
+                                        setKidCounter((prev) =>
+                                            kidCounter <= 0 ? 0 : prev - 1
+                                        )
+                                    }
+                                >
                                     <i className="fas fa-minus"></i>
                                 </button>
-                                <span>0</span>
-                                <button className="filter__btn">
+                                <span>{kidCounter}</span>
+                                <button
+                                    className="filter__btn"
+                                    onClick={() =>
+                                        setKidCounter((prev) => prev + 1)
+                                    }
+                                >
                                     <i className="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -104,61 +153,6 @@ const SearchForm = ({ cities, ...props }) => {
                     )}
                 </div>
             </div>
-            {/*             <div className="result">
-                <ul className="result__list">
-                    {showLocations &&
-                        locations.map((location) => {
-                            return (
-                                <li
-                                    key={location}
-                                    className="list__item"
-                                    onClick={({ target }) =>
-                                        console.log(target.innerText)
-                                    }
-                                >
-                                    <i className="fas fa-map-marker-alt"></i>{' '}
-                                    <a
-                                        href="#"
-                                        className="item__link"
-                                    >{`${location}`}</a>
-                                    <span>, Britain</span>
-                                </li>
-                            );
-                        })}
-                </ul>
-            </div>
-            <div className="guests">
-                {showGuestFilter && (
-                    <div className="guests__filter">
-                        <div className="filter__text">adult</div>
-                        <div className="filter__subtext">ages 13 and above</div>
-                        <div className="filter__btns">
-                            <button className="filter__btn">
-                                <i className="fas fa-minus"></i>
-                            </button>
-                            <span>0</span>
-                            <button className="filter__btn">
-                                <i className="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                )}
-                {showGuestFilter && (
-                    <div className="guests__filter">
-                        <div className="filter__text">kids</div>
-                        <div className="filter__subtext">ages 2-12</div>
-                        <div className="filter__btns">
-                            <button className="filter__btn">
-                                <i className="fas fa-minus"></i>
-                            </button>
-                            <span>0</span>
-                            <button className="filter__btn">
-                                <i className="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                )}
-            </div> */}
         </div>
     );
 };
