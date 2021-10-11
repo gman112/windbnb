@@ -1,7 +1,7 @@
 import { set } from 'lodash';
 import React, { useState } from 'react';
 import v from 'voca';
-const SearchForm = ({ cities, ...props }) => {
+const SearchForm = ({ cities, handleClick, ...props }) => {
     const [locations, setLocations] = useState([
         ...new Set(cities.map(({ city }) => city)),
     ]);
@@ -10,6 +10,7 @@ const SearchForm = ({ cities, ...props }) => {
     const [adultCounter, setAdultCounter] = useState(0);
     const [kidCounter, setKidCounter] = useState(0);
     const [locationInput, setLocationInput] = useState('');
+    const [guestInput, setGuestInput] = useState(0);
     const [totalGuests, setTotalGuests] = useState(0);
 
     return (
@@ -46,7 +47,7 @@ const SearchForm = ({ cities, ...props }) => {
                 <div className="form__group">
                     <label htmlFor="guests">guests</label>
                     <input
-                        type="number"
+                        value={guestInput}
                         className="form__input"
                         name="guests"
                         placeholder="Add guests"
@@ -60,9 +61,13 @@ const SearchForm = ({ cities, ...props }) => {
                 <div className="form__group">
                     <button
                         className="form__btn"
-                        onClick={(e) => {
-                            e.preventDefault();
+                        onClick={(event) => {
                             setTotalGuests(kidCounter + adultCounter);
+
+                            handleClick({
+                                location: locationInput,
+                                guests: kidCounter + adultCounter,
+                            });
                         }}
                     >
                         <i className="fas fa-search btn__icon"></i> search
@@ -104,20 +109,24 @@ const SearchForm = ({ cities, ...props }) => {
                             <div className="filter__btns">
                                 <button
                                     className="filter__btn"
-                                    onClick={() =>
+                                    onClick={() => {
                                         setAdultCounter((prev) =>
                                             prev <= 0 ? 0 : prev - 1
-                                        )
-                                    }
+                                        );
+                                        setGuestInput((prev) =>
+                                            prev === 0 ? 0 : prev - 1
+                                        );
+                                    }}
                                 >
                                     <i className="fas fa-minus"></i>
                                 </button>
                                 <span>{adultCounter}</span>
                                 <button
                                     className="filter__btn"
-                                    onClick={() =>
-                                        setAdultCounter((prev) => prev + 1)
-                                    }
+                                    onClick={() => {
+                                        setAdultCounter((prev) => prev + 1);
+                                        setGuestInput((prev) => prev + 1);
+                                    }}
                                 >
                                     <i className="fas fa-plus"></i>
                                 </button>
@@ -131,11 +140,14 @@ const SearchForm = ({ cities, ...props }) => {
                             <div className="filter__btns">
                                 <button
                                     className="filter__btn"
-                                    onClick={() =>
+                                    onClick={() => {
                                         setKidCounter((prev) =>
                                             kidCounter <= 0 ? 0 : prev - 1
-                                        )
-                                    }
+                                        );
+                                        setTotalGuests(
+                                            (prev) => (prev = kidCounter)
+                                        );
+                                    }}
                                 >
                                     <i className="fas fa-minus"></i>
                                 </button>
