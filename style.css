@@ -342,3 +342,10 @@ label[for='guests'] {
 .card__container--blur {
     filter: blur(2px);
 }
+
+.result__text {
+    color: #6b7280;
+    font-size: 1.25rem;
+    margin-left: 4px;
+    pointer-events: fill;
+}

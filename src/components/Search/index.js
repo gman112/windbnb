@@ -1,4 +1,4 @@
-import { set } from 'lodash';
+import { isNumber, set } from 'lodash';
 import React, { useState } from 'react';
 import v from 'voca';
 const SearchForm = ({ cities, handleClick, ...props }) => {
@@ -47,7 +47,11 @@ const SearchForm = ({ cities, handleClick, ...props }) => {
                 <div className="form__group">
                     <label htmlFor="guests">guests</label>
                     <input
-                        value={guestInput}
+                        value={
+                            guestInput === 1
+                                ? `${guestInput} guest`
+                                : `${guestInput} guests`
+                        }
                         className="form__input"
                         name="guests"
                         placeholder="Add guests"

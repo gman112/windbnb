@@ -15,12 +15,15 @@ const App = () => {
     const [staysData, setStays] = useState(stays);
     const [banner, setBanner] = useState('trending stays');
     const handleClick = ({ location, guests }) => {
-        setStays(
-            staysData.filter(
-                ({ city, maxGuests }) =>
-                    city === location && maxGuests === guests
-            )
-        );
+        guests <= 0
+            ? setStays(staysData.filter(({ city }) => city === location))
+            : setStays(
+                  staysData.filter(
+                      ({ city, maxGuests }) =>
+                          city === location && maxGuests === guests
+                  )
+              );
+
         setBanner(`stays in ${location}`);
         setToggle(true);
     };
@@ -32,41 +35,58 @@ const App = () => {
                     <SearchForm cities={staysData} handleClick={handleClick} />
                 )}
             </SearchContext.Provider>
-            <Banner banner={banner} />
+            <Banner banner={banner} numberOfStays={staysData.length} />
             <div
                 className={`card__container ${
                     toggle ? '' : 'card__container--blur'
                 }`}
                 onClick={() => setToggle(!toggle)}
             >
-                {staysData.map(
-                    ({
-                        id,
-                        city,
-                        country,
-                        superHost,
-                        title,
-                        rating,
-                        maxGuests,
-                        beds,
-                        photo,
-                        type,
-                    }) => {
-                        return (
-                            <Card
-                                key={id}
-                                city={city}
-                                country={country}
-                                host={superHost}
-                                title={title}
-                                rating={rating}
-                                maxGuests={maxGuests}
-                                beds={beds}
-                                photo={photo}
-                                type={type}
-                            />
-                        );
-                    }
+                {staysData.length > 0 ? (
+                    staysData.map(
+                        ({
+                            id,
+                            city,
+                            country,
+                            superHost,
+                            title,
+                            rating,
+                            maxGuests,
+                            beds,
+                            photo,
+                            type,
+                        }) => {
+                            return (
+                                <Card
+                                    key={id}
+                                    city={city}
+                                    country={country}
+                                    host={superHost}
+                                    title={title}
+                                    rating={rating}
+                                    maxGuests={maxGuests}
+                                    beds={beds}
+                                    photo={photo}
+                                    type={type}
+                                />
+                            );
+                        }
+                    )
+                ) : (
+                    <p className="result__text">
+                        sorry, we couldn't find any results{' '}
+                        <a
+                            onClick={(e) => {
+                                e.preventDefault();
+                                console.log('test');
+                                setStays(stays);
+                                setToggle(true);
+                            }}
+                            href="#"
+                        >
+                            try again
+                        </a>
+                    </p>
                 )}
             </div>
         </Fragment>
