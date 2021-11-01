@@ -32,7 +32,7 @@ const App = () => {
             <SearchContext.Provider value={{ toggle, setToggle }}>
                 {toggle && <Navbar />}
                 {!toggle && (
-                    <SearchForm cities={staysData} handleClick={handleClick} />
+                    <SearchForm cities={staysData} handleClick={handleClick}/>
                 )}
             </SearchContext.Provider>
             <Banner banner={banner} numberOfStays={staysData.length} />
@@ -78,9 +78,7 @@ const App = () => {
                         <a
                             onClick={(e) => {
                                 e.preventDefault();
-                                console.log('test');
                                 setStays(stays);
-                                setToggle(true);
                             }}
                             href="#"
                         >

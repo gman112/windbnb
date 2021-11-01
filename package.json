@@ -19,5 +19,8 @@
     },
     "browserslist": [
         "since 2017-06"
-    ]
+    ],
+    "devDependencies": {
+        "parcel": "^2.0.0"
+    }
 }
