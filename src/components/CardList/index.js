@@ -1,4 +1,4 @@
-import Card from '../CardItem/';
+import Card from './CardItem';
 
 const CardList = ({ data }) => {
   return (
