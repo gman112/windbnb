@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import ResultList from './ResultList';
 import GuestFilter from './GuestFilter';
 
 const FilterDraw = ({ toggleNavbar, locations }) => {
+  const [adultCounter, setAdultCounter] = useState(0);
+  const [childCounter, setChildCounter] = useState(0);
   return (
     <div className='flex flex-col lg:flex lg:flex-row lg:w-full lg:flex-wrap'>
       <div className='flex justify-between mx-4 mt-4 items-center'>
@@ -59,11 +62,24 @@ const FilterDraw = ({ toggleNavbar, locations }) => {
       <div className='lg:flex lg:w-3/4 mx-12 mt-8'>
         <ResultList locations={locations} showList={'hidden'} />
         <div className='lg:w-full lg:flex lg:flex-col hidden'>
-          <GuestFilter title={'adults'} subtitle={'Ages 13 or above'} />
+          <GuestFilter
+            title={'adults'}
+            subtitle={'Ages 13 or above'}
+            counter={adultCounter}
+            incrementCounter={() => setAdultCounter((prev) => prev + 1)}
+            decrementCounter={() =>
+              setAdultCounter((prev) => (prev <= 0 ? 0 : prev - 1))
+            }
+          />
           <GuestFilter
             title={'children'}
             subtitle={'Ages 12-2'}
             margin='mt-8'
+            counter={childCounter}
+            incrementCounter={() => setChildCounter((prev) => prev + 1)}
+            decrementCounter={() =>
+              setChildCounter((prev) => (prev <= 0 ? 0 : prev - 1))
+            }
           />
         </div>
       </div>
