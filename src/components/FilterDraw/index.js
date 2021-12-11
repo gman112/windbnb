@@ -5,6 +5,8 @@ import GuestFilter from './GuestFilter';
 const FilterDraw = ({ toggleNavbar, locations }) => {
   const [adultCounter, setAdultCounter] = useState(0);
   const [childCounter, setChildCounter] = useState(0);
+  const [totalGuest, setTotalGuest] = useState(0);
+
   return (
     <div className='flex flex-col lg:flex lg:flex-row lg:w-full lg:flex-wrap'>
       <div className='flex justify-between mx-4 mt-4 items-center'>
@@ -42,7 +44,10 @@ const FilterDraw = ({ toggleNavbar, locations }) => {
         />
       </div>
       <ResultList locations={locations} showList={'lg:hidden'} />
-      <button className='flex bg-red-500 justify-evenly text-white rounded-3xl w-2/5 self-center py-4 px-4 mt-6 lg:w-1/5 lg:justify-center'>
+      <button
+        className='flex bg-red-500 justify-evenly text-white rounded-3xl w-2/5 self-center py-4 px-4 mt-6 lg:w-1/5 lg:justify-center'
+        onClick={() => setTotalGuest(adultCounter + childCounter)}
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-6 w-6'
