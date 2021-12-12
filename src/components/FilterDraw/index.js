@@ -2,10 +2,16 @@ import { useState } from 'react';
 import ResultList from './ResultList';
 import GuestFilter from './GuestFilter';
 
-const FilterDraw = ({ toggleNavbar, locations }) => {
+const FilterDraw = ({
+  toggleNavbar,
+  locations,
+  filterGuestValue,
+  filterLocationValue,
+  filterData,
+  location,
+}) => {
   const [adultCounter, setAdultCounter] = useState(0);
   const [childCounter, setChildCounter] = useState(0);
-  const [totalGuest, setTotalGuest] = useState(0);
 
   return (
     <div className='flex flex-col lg:flex lg:flex-row lg:w-full lg:flex-wrap'>
@@ -33,6 +39,7 @@ const FilterDraw = ({ toggleNavbar, locations }) => {
       </div>
       <div className='flex flex-col border-2 border-gray-100 mx-4 rounded-2xl mt-4 relative shadow-md lg:flex lg:flex-row lg:w-3/4'>
         <input
+          value={location}
           type='text'
           placeholder='London'
           className='h-14 border-b-1 border-gray-200 px-4 capitalize lg:focus:border-gray-600 lg:w-1/2 lg:border-r-2 lg:border-b-0 rounded-l-2xl'
@@ -46,7 +53,10 @@ const FilterDraw = ({ toggleNavbar, locations }) => {
       <ResultList locations={locations} showList={'lg:hidden'} />
       <button
         className='flex bg-red-500 justify-evenly text-white rounded-3xl w-2/5 self-center py-4 px-4 mt-6 lg:w-1/5 lg:justify-center'
-        onClick={() => setTotalGuest(adultCounter + childCounter)}
+        onClick={() => {
+          filterGuestValue(childCounter + adultCounter);
+          filterData();
+        }}
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -65,7 +75,11 @@ const FilterDraw = ({ toggleNavbar, locations }) => {
         <span className='capitalize'>search</span>
       </button>
       <div className='lg:flex lg:w-3/4 mx-12 mt-8'>
-        <ResultList locations={locations} showList={'hidden'} />
+        <ResultList
+          locations={locations}
+          showList={'hidden'}
+          filterLocationValue={filterLocationValue}
+        />
         <div className='lg:w-full lg:flex lg:flex-col hidden'>
           <GuestFilter
             title={'adults'}

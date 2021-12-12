@@ -1,6 +1,9 @@
-const LocationItem = ({ location }) => {
+const LocationItem = ({ location, filterLocationValue }) => {
   return (
-    <li className='flex font-mulish font-lighter lg:items-center items-center mt-2'>
+    <li
+      className='flex font-mulish font-lighter lg:items-center items-center mt-2'
+      onClick={(e) => filterLocationValue(e.target.innerText)}
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         className='h-6 w-6 mr-2 ml-4 text-gray-500'
@@ -21,7 +24,7 @@ const LocationItem = ({ location }) => {
           d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
         />
       </svg>
-      <button className='text-sm my-4'>{location}, Britain</button>
+      <button className='text-sm my-4'>{location}</button>
     </li>
   );
 };
