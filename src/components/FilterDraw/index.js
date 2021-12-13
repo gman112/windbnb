@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { createRef, useState } from 'react';
 import ResultList from './ResultList';
 import GuestFilter from './GuestFilter';
 
@@ -11,6 +11,7 @@ const FilterDraw = ({
 }) => {
   const [adultCounter, setAdultCounter] = useState(0);
   const [childCounter, setChildCounter] = useState(0);
+  const [totalGuests, setTotalGuests] = useState();
 
   return (
     <div className='flex flex-col lg:flex lg:flex-row lg:w-full lg:flex-wrap'>
@@ -44,7 +45,8 @@ const FilterDraw = ({
           className='h-14 border-b-1 border-gray-200 px-4 capitalize lg:focus:border-gray-600 lg:w-1/2 lg:border-r-2 lg:border-b-0 rounded-l-2xl outline-none'
         />
         <input
-          value={childCounter + adultCounter}
+          value={totalGuests}
+          onChange={(e) => setTotalGuests(e.target.value)}
           type='number'
           placeholder='add guests'
           className='h-14 px-4 capitalize lg:w-1/2 lg:focus:border-gray-600 lg:border-b-0 rounded-r-2xl outline-none'
@@ -57,7 +59,7 @@ const FilterDraw = ({
       />
       <button
         className='flex bg-red-500 justify-evenly text-white rounded-3xl w-2/5 self-center py-4 px-4 mt-6 lg:w-1/5 lg:justify-center'
-        onClick={() => filterData(childCounter, adultCounter)}
+        onClick={() => filterData(totalGuests, childCounter, adultCounter)}
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'

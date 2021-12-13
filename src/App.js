@@ -10,13 +10,22 @@ const App = () => {
   const [toggle, istoggle] = useState(true);
   const [location, setLocation] = useState('');
 
-  const filterData = (childCounter, adultCounter) => {
-    const total = childCounter + adultCounter;
-    setData(
-      stays.filter(
-        ({ city, maxGuests }) => city === location && maxGuests === total
-      )
-    );
+  const filterData = (total, childTotal, adultTotal) => {
+    const totalGuests = childTotal + adultTotal;
+    total > 0
+      ? setData(
+          stays.filter(
+            ({ city, maxGuests }) =>
+              city === location && maxGuests === parseInt(total)
+          )
+        )
+      : setData(
+          stays.filter(
+            ({ city, maxGuests }) =>
+              city === location && maxGuests === parseInt(totalGuests)
+          )
+        );
+
     istoggle(true);
   };
 
