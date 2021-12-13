@@ -5,7 +5,6 @@ import GuestFilter from './GuestFilter';
 const FilterDraw = ({
   toggleNavbar,
   locations,
-  filterGuestValue,
   filterLocationValue,
   filterData,
   location,
@@ -42,21 +41,23 @@ const FilterDraw = ({
           value={location}
           type='text'
           placeholder='London'
-          className='h-14 border-b-1 border-gray-200 px-4 capitalize lg:focus:border-gray-600 lg:w-1/2 lg:border-r-2 lg:border-b-0 rounded-l-2xl'
+          className='h-14 border-b-1 border-gray-200 px-4 capitalize lg:focus:border-gray-600 lg:w-1/2 lg:border-r-2 lg:border-b-0 rounded-l-2xl outline-none'
         />
         <input
+          value={childCounter + adultCounter}
           type='number'
           placeholder='add guests'
-          className='h-14 px-4 capitalize lg:w-1/2 lg:focus:border-gray-600 lg:border-b-0 rounded-r-2xl'
+          className='h-14 px-4 capitalize lg:w-1/2 lg:focus:border-gray-600 lg:border-b-0 rounded-r-2xl outline-none'
         />
       </div>
-      <ResultList locations={locations} showList={'lg:hidden'} />
+      <ResultList
+        locations={locations}
+        showList={'lg:hidden'}
+        filterLocationValue={filterLocationValue}
+      />
       <button
         className='flex bg-red-500 justify-evenly text-white rounded-3xl w-2/5 self-center py-4 px-4 mt-6 lg:w-1/5 lg:justify-center'
-        onClick={() => {
-          filterGuestValue(childCounter + adultCounter);
-          filterData();
-        }}
+        onClick={() => filterData(childCounter, adultCounter)}
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'

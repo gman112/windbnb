@@ -8,13 +8,13 @@ import stays from './stays.json';
 const App = () => {
   const [data, setData] = useState(stays);
   const [toggle, istoggle] = useState(true);
-  const [totalGuest, setTotalGuest] = useState(0);
   const [location, setLocation] = useState('');
 
-  const filterData = () => {
+  const filterData = (childCounter, adultCounter) => {
+    const total = childCounter + adultCounter;
     setData(
       stays.filter(
-        ({ city, maxGuests }) => city === location && maxGuests === totalGuest
+        ({ city, maxGuests }) => city === location && maxGuests === total
       )
     );
     istoggle(true);
@@ -27,7 +27,6 @@ const App = () => {
       ) : (
         <FilterDraw
           toggleNavbar={(toggle) => istoggle(toggle)}
-          filterGuestValue={(total) => setTotalGuest(total)}
           filterLocationValue={(location) => setLocation(location)}
           filterData={filterData}
           locations={['London', 'Birmingham', 'Liverpool', 'Edinburgh']}
