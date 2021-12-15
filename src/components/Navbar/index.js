@@ -5,17 +5,17 @@ const Navbar = () => {
   const [location, setLocation] = useState('');
   const [totalGuests, setTotalGuests] = useState();
   return (
-    <Fragment>
-      <div className='flex w-full lg:w-auto'>
+    <div className='flex flex-col w-10/12 justify-center lg:flex-row lg:justify-between lg:w-full lg:bg-green-500'>
+      <div className='flex  lg:w-auto'>
         <img src={logo} alt='logo.svg' className='py-4 px-4' />
       </div>
-      <div className='flex justify-center mx-4 lg:w-1/4 lg:mt-0'>
-        <div className='flex flex-col w-full mt-8 lg:mt-0 lg:flex-row lg:items-center lg:mr-8'>
+      <div className='flex justify-center lg:mt-0'>
+        <div className='flex flex-col w-full mt-8 lg:mt-0 lg:flex-row lg:items-center'>
           <input
             value={location}
             type='text'
             placeholder='London'
-            className='border-2 border-gray-300 py-4 px-2 capitalize focus:outline-none rounded-tr-lg rounded-tl-lg lg:py-2 lg:px-0 lg:rounded-l-lg lg:border-2 lg:border-r-1 lg:rounded-r-none'
+            className='border-2 border-gray-300 py-4 px-2 capitalize focus:outline-none rounded-tr-lg rounded-tl-lg lg:py-4 lg:px-2 lg:rounded-l-2xl lg:border-2 lg:border-r-1 lg:rounded-r-none'
             onChange={({ target }) => setLocation(target.value)}
           />
           <input
@@ -23,12 +23,12 @@ const Navbar = () => {
             type='number'
             min='0'
             placeholder='add guests'
-            className='border-2 border-t-0 border-gray-300 py-4 px-2 capitalize focus:outline-none rounded-br-lg rounded-bl-lg lg:py-2 lg:px-0 lg:rounded-none lg:border-2 lg:border-l-0 lg:border-r-1'
+            className='border-2 border-t-0 border-gray-300 py-4 px-2 capitalize focus:outline-none rounded-br-lg rounded-bl-lg lg:py-4 lg:px-2 lg:rounded-none lg:border-2 lg:border-l-0 lg:border-r-1'
             onChange={({ target }) => setTotalGuests(target.value)}
           />
           <button
             type='submit'
-            className='py-2 bg-red-400 relative mt-6 rounded-md flex justify-center items-center w-1/2 self-center lg:mt-0 lg:bg-transparent lg:border-2 lg:border-gray-300 lg:border-l-0 lg:rounded-l-none'
+            className=' py-2 lg:px-2 lg:py-4 bg-red-400 relative mt-6 rounded-md lg:rounded-2xl flex justify-center items-center w-1/2 self-center lg:mt-0 lg:bg-transparent lg:border-2 lg:border-gray-300 lg:border-l-0 lg:rounded-l-none'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -49,7 +49,7 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
