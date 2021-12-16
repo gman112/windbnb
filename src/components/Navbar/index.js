@@ -1,13 +1,13 @@
 import { Fragment, useState } from 'react';
 import logo from '../../svg/logo.svg';
 
-const Navbar = () => {
+const Navbar = ({ filterOptions }) => {
   const [location, setLocation] = useState('');
   const [totalGuests, setTotalGuests] = useState();
   return (
-    <div className='flex flex-col w-10/12 justify-center lg:flex-row lg:justify-between lg:w-full lg:bg-green-500'>
-      <div className='flex  lg:w-auto'>
-        <img src={logo} alt='logo.svg' className='py-4 px-4' />
+    <div className='flex flex-col mx-4 justify-center lg:flex-row lg:justify-between lg:w-full'>
+      <div className='flex w-full lg:w-auto'>
+        <img src={logo} alt='logo.svg' className='py-2 px-2 lg:h-32 lg:w-32' />
       </div>
       <div className='flex justify-center lg:mt-0'>
         <div className='flex flex-col w-full mt-8 lg:mt-0 lg:flex-row lg:items-center'>
@@ -27,16 +27,16 @@ const Navbar = () => {
             onChange={({ target }) => setTotalGuests(target.value)}
           />
           <button
+            onClick={() => filterOptions(location, totalGuests)}
             type='submit'
-            className=' py-2 lg:px-2 lg:py-4 bg-red-400 relative mt-6 rounded-md lg:rounded-2xl flex justify-center items-center w-1/2 self-center lg:mt-0 lg:bg-transparent lg:border-2 lg:border-gray-300 lg:border-l-0 lg:rounded-l-none'
+            className=' py-2 lg:px-2 lg:py-4 bg-red-400 relative mt-6 rounded-md lg:rounded-2xl flex justify-center items-center w-1/2 self-center lg:mt-0 lg:bg-transparent lg:border-2 lg:border-gray-300 lg:border-l-0 lg:rounded-l-none lg:bg-red-400 lg:text-white'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
-              className='h-6 w-6 text-white mr-2 lg:text-red-400'
-              //className='h-6 w-6 absolute text-red-500 top-4 right-4 lg:h-6 lg:w-6 lg:text-center'
+              className='h-6 w-6 mr-2 text-white'
             >
               <path
                 strokeLinecap='round'

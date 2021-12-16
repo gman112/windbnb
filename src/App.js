@@ -7,26 +7,23 @@ import stays from './stays.json';
 const App = () => {
   const [data, setData] = useState(stays);
 
-  const filterData = (total, childTotal, adultTotal) => {
-    /* const totalGuests = childTotal + adultTotal;
-    total > 0
-      ? setData(
-          stays.filter(
-            ({ city, maxGuests }) =>
-              city === location && maxGuests === parseInt(total)
-          )
-        )
-      : setData(
-          stays.filter(
-            ({ city, maxGuests }) =>
-              city === location && maxGuests === parseInt(totalGuests)
-          )
-        ); */
+  const filterData = (location, totalGuests) => {
+    setData(
+      stays.filter(
+        ({ city, maxGuests }) =>
+          location.charAt(0).toUpperCase() + location.slice(1) === city &&
+          parseInt(totalGuests) === maxGuests
+      )
+    );
   };
 
   return (
     <div className='flex flex-col lg:flex lg:justify-between lg:flex-row lg:items-center lg:mt-12 lg:mx-8 lg:flex-wrap'>
-      <Navbar />
+      <Navbar
+        filterOptions={(location, totalGuests) =>
+          filterData(location, totalGuests)
+        }
+      />
       <ResultBanner results={data.length} />
       <CardList data={data} />
     </div>
